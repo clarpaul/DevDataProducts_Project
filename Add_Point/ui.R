@@ -15,9 +15,10 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("Interactive plot: click in the plotting area"),
   
-    # Show a plot of the generated distribution
+    # Show a plot
     mainPanel(
-       plotOutput("Plot1")
+       plotOutput("plot1", click = "plot1_click"),
+       verbatimTextOutput("info")
     )
   )
 )
