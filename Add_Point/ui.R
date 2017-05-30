@@ -13,11 +13,13 @@ library(shiny)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Interactive plot: click in the plotting area"),
+  titlePanel("Interactive plot"),
   
     # Show a plot
     mainPanel(
+       h4("Click in the plotting area to add a point to the regression"),
        plotOutput("plot1", click = "plot1_click"),
+       h4("Coordinates of added point"),
        verbatimTextOutput("info")
     )
   )

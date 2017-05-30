@@ -8,43 +8,40 @@
 #
 
 library(shiny)
+
+xy <- function(val) {
+        if (val == 0) return("NULL")
+        round(val,1)
+}
+
 shinyServer(function(input, output) {
-        data(mtcars)
+        # Note suggestion from post for adding multiple points
+        # ptlist <- list(x = vector("numeric",0), y = vector("numeric",0))
         mtcarswpt <- subset(mtcars, select = c(hp, mpg))
         clickvals <- c(0,0)
         output$plot1 <- renderPlot({
                 if (!is.null(input$plot1_click)) {
                         data(mtcars)
-                        mtcarswpt <- subset(mtcars, select = c(hp, mpg))
-                        set <- function() {
-                                click_y <- input$plot1_click$y
-                                click_x <- input$plot1_click$x
-                                mtcarswpt <- data.frame(rbind(mtcarswpt,
-                                                        c(click_y, click_x)))
-                                function() {
-                                        c(click_x, click_y)
-                                }
-                        }
-                        clickvals <- set()
+                        mtcarswpt <<- subset(mtcars, select = c(hp, mpg))
+                        clickvals[2] <<- input$plot1_click$y
+                        clickvals[1] <<- input$plot1_click$x
+                        # Note suggestion from post
+                        # ptlist$x <<- c(ptlist$x, clickvals[1])
+                        # ptlist$y <<- c(ptlist$y, clickvals[2])
+                        mtcarswpt <<- data.frame(rbind(mtcarswpt,
+                                                c(clickvals[2], clickvals[1])))
                 }
                 plot(mtcarswpt$mpg, mtcarswpt$hp, xlab = "Miles Per Gallon", 
                      ylab = "Horsepower", bty = "n", pch = 16,
                      xlim = c(10, 35), ylim = c(50, 350))
                 model1 <- lm(hp ~ mpg, data = mtcarswpt)
                 abline(model1, col = "red", lwd = 2)
-                points(clickvals[1], clickvals[2] , col = "blue", pch = 16, cex = 2)
-                if (!is.null(input$plot1_click)) {
-
-                        
-                }
+                points(clickvals[1], clickvals[2] , col = "blue", pch = 16, cex = 1.5)
         })
         
         output$info <- renderText({
-                if (!is.null(input$plot1_click)) {
-                        paste0("x = ", round(input$plot1_click$x, 1), "\ny = ", round(input$plot1_click$y, 1))
-                } else {
-                        paste0("x = ", "\ny = ")
-                }
+                        click <- input$plot1_click # triggers `renderText`` to execute on click
+                        paste0("MPG = ", xy(clickvals[1]), "\nHP = ", xy(clickvals[2]))
         })
         
         
