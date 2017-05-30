@@ -9,21 +9,33 @@
 
 library(shiny)
 shinyServer(function(input, output) {
-        
+        data(mtcars)
+        mtcarswpt <- subset(mtcars, select = c(hp, mpg))
+        clickvals <- c(0,0)
         output$plot1 <- renderPlot({
-                data(mtcars)
-                mtcarswpt <- subset(mtcars, select = c(hp, mpg))
                 if (!is.null(input$plot1_click)) {
+                        data(mtcars)
+                        mtcarswpt <- subset(mtcars, select = c(hp, mpg))
+                        set <- function() {
+                                click_y <- input$plot1_click$y
+                                click_x <- input$plot1_click$x
                                 mtcarswpt <- data.frame(rbind(mtcarswpt,
-                                        c(input$plot1_click$y, input$plot1_click$x)))
+                                                        c(click_y, click_x)))
+                                function() {
+                                        c(click_x, click_y)
+                                }
+                        }
+                        clickvals <- set()
                 }
                 plot(mtcarswpt$mpg, mtcarswpt$hp, xlab = "Miles Per Gallon", 
                      ylab = "Horsepower", bty = "n", pch = 16,
                      xlim = c(10, 35), ylim = c(50, 350))
                 model1 <- lm(hp ~ mpg, data = mtcarswpt)
                 abline(model1, col = "red", lwd = 2)
+                points(clickvals[1], clickvals[2] , col = "blue", pch = 16, cex = 2)
                 if (!is.null(input$plot1_click)) {
-                        points(input$plot1_click$x, input$plot1_click$y , col = "blue", pch = 16, cex = 2)
+
+                        
                 }
         })
         
