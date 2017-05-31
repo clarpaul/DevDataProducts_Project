@@ -17,9 +17,9 @@ shinyUI(fluidPage(
   
     # Show a plot
     mainPanel(
-       h4("Click in plot area to add points to regression"),
+       h4("Click plot area to add regression points"),
        plotOutput("plot1", click = "plot1_click"),
-       actionButton("button", "Clear plot"),
+       actionButton("button", "Clear added points"),
        h4("Coordinates of most recently added point"),
        verbatimTextOutput("infopts"),
        h4("Correlation and p-value"),
