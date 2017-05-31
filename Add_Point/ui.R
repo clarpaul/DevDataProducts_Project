@@ -27,10 +27,10 @@ shinyUI(fluidPage(
        h4("Coordinates of most recently added point"),
        verbatimTextOutput("info_added_pt"),
        
-       h4("Equation of best fit line by least squares (including any added points)"),
+       h4("Equation: least squares best fit line"),
        verbatimTextOutput("info_equation"),
        
-       h4("Correlation and p-value (including any added points)"),
+       h4("Correlation and p-value"),
        verbatimTextOutput("info_coefs")
     )
   )
