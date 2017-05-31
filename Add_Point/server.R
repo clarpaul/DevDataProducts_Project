@@ -15,7 +15,6 @@ xy <- function(val) {
 }
 
 shinyServer(function(input, output) {
-        # Note suggestion from post for adding multiple points
 
         ptlist <- list(x = vector("numeric",0), y = vector("numeric",0))
         mtcarswpt <- subset(mtcars, select = c(hp, mpg))
@@ -32,15 +31,14 @@ shinyServer(function(input, output) {
         
         output$plot1 <- renderPlot({
                 if (is.null(v$clearpoints)) {
-                if (!is.null(input$plot1_click)) {
-                        clickvals[2] <<- input$plot1_click$y
-                        clickvals[1] <<- input$plot1_click$x
-                        # Note suggestion from post
-                        ptlist$x <<- c(ptlist$x, clickvals[1])
-                        ptlist$y <<- c(ptlist$y, clickvals[2])
-                        mtcarswpt <<- data.frame(rbind(mtcarswpt,
+                        if (!is.null(input$plot1_click)) {
+                                clickvals[2] <<- input$plot1_click$y
+                                clickvals[1] <<- input$plot1_click$x
+                                ptlist$x <<- c(ptlist$x, clickvals[1])
+                                ptlist$y <<- c(ptlist$y, clickvals[2])
+                                mtcarswpt <<- data.frame(rbind(mtcarswpt,
                                                 c(clickvals[2], clickvals[1])))
-                }
+                        }
                 }
                 replot()
                 isolate(v$clearpoints <- NULL)
