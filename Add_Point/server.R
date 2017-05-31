@@ -11,26 +11,33 @@ library(shiny)
 
 xy <- function(val) {
         if (val == 0) return("NULL")
-        round(val,1)
+        format(round(val,1), nsmall = 1)
 }
 
 shinyServer(function(input, output) {
-
-        ptlist <- list(x = vector("numeric",0), y = vector("numeric",0))
-        mtcarswpt <- subset(mtcars, select = c(hp, mpg))
-        clickvals <- c(0,0)
+        
+        initialize_data <- function() {
+                ptlist <<- list(x = vector("numeric",0), y = vector("numeric",0))
+                mtcarswpt <<- subset(mtcars, select = c(hp, mpg))
+                clickvals <<- c(0,0)
+        }
+        
+        initialize_data()
         
         replot <- function() {
-                plot(mtcarswpt$mpg, mtcarswpt$hp, xlab = "Miles Per Gallon", 
-                        ylab = "Horsepower", bty = "n", pch = 16,
+                plot(mtcarswpt$mpg, mtcarswpt$hp, main =
+                        "Horsepower vs. Miles-per-gallon", 
+                        xlab = "MPG", ylab = "HP", bty = "n", pch = 16,
                         xlim = c(10, 35), ylim = c(50, 350))
+                mtext("From R `mtcars` dataset")
                 model1 <<- lm(hp ~ mpg, data = mtcarswpt)
                 abline(model1, col = "red", lwd = 2)
                 points(ptlist$x, ptlist$y, col = "red", pch = 16, cex = 1.5)
         }
         
         output$plot1 <- renderPlot({
-                if (is.null(v$clearpoints)) {
+                if (!v$clearpoints) {
+                
                         if (!is.null(input$plot1_click)) {
                                 clickvals[2] <<- input$plot1_click$y
                                 clickvals[1] <<- input$plot1_click$x
@@ -41,29 +48,42 @@ shinyServer(function(input, output) {
                         }
                 }
                 replot()
-                isolate(v$clearpoints <- NULL)
+                isolate(v$clearpoints <- FALSE)
         })
         
-        output$infopts <- renderText({
-                        clearpoints <- v$clearpoints # triggers `renderText` on buttonpush
-                        click <- input$plot1_click # assignment triggers `renderText` execution
-                        paste0("MPG = ", xy(clickvals[1]), "\nHP = ", xy(clickvals[2]))
+        output$info_added_pt <- renderText({
+                        
+                clearpoints <- v$clearpoints # `v` triggers `renderText` on buttonpush
+                click <- input$plot1_click # `plot1_click` triggers `renderText` on mouse-click
+                
+                paste0("MPG = ", xy(clickvals[1]), "\nHP = ", xy(clickvals[2]))
         })
         
-        output$infocoefs <- renderText({
-                clearpoints <- v$clearpoints # triggers `renderText` on buttonpush
-                click <- input$plot1_click # assignment triggers `renderText` execution
-                cor_mtcars <- round(cor(mtcarswpt$hp, mtcarswpt$mpg),2)
-                pval <- format(anova(model1)$`Pr(>F)`[[1]], digits = 3)
-                paste0("Cor = ", cor_mtcars, "\nP-Value of MPG = ", pval)
+        output$info_coefs <- renderText({
+                
+                clearpoints <- v$clearpoints # `v` triggers `renderText` on buttonpush
+                click <- input$plot1_click # `plot1_click` triggers `renderText` on mouse-click
+                
+                cor_mtcars <- format(round(cor(mtcarswpt$hp, mtcarswpt$mpg),2), nsmall = 2)
+                pval <- paste0(format(anova(model1)$`Pr(>F)`[[1]]*100, digits = 3), "%")
+                paste0("Cor(HP, MPG) = ", cor_mtcars, "\nP-Value of MPG = ", pval)
         })
         
-        v <- reactiveValues(clearpoints = NULL)
+        output$info_equation <- renderText({
+                
+                clearpoints <- v$clearpoints # `v` triggers `renderText` on buttonpush
+                click <- input$plot1_click # `plot1_click` triggers `renderText` on mouse-click
+                
+                intercept <- format(round(coef(model1)[[1]],1), nsmall = 1)
+                MPG <- format(round(coef(model1)[[2]],2), nsmall = 2)
+                paste0("HP = ", intercept, " + ", MPG, " * ", "MPG")
+        })
+        
+        
+        v <- reactiveValues(clearpoints = FALSE)
         
         observeEvent(input$button, {
-                ptlist <<- list(x = vector("numeric",0), y = vector("numeric",0))
-                mtcarswpt <<- subset(mtcars, select = c(hp, mpg))
-                clickvals <<- c(0,0)
+                initialize_data()
                 v$clearpoints <- TRUE
         })
         

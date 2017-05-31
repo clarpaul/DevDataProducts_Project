@@ -13,17 +13,25 @@ library(shiny)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Regression model: Effect of adding observations"),
+  titlePanel("Regression Model: Effect of Adding Observations"),
   
-    # Show a plot
+    # Show a plot and related information
     mainPanel(
-       h4("Click plot area to add regression points"),
+       h4("Instructions: Click inside plot area to add points to regression"),
        plotOutput("plot1", click = "plot1_click"),
+       
        actionButton("button", "Clear added points"),
+       
+       # Information boxes
+       
        h4("Coordinates of most recently added point"),
-       verbatimTextOutput("infopts"),
-       h4("Correlation and p-value"),
-       verbatimTextOutput("infocoefs")
+       verbatimTextOutput("info_added_pt"),
+       
+       h4("Equation of best fit line by least squares (including any added points)"),
+       verbatimTextOutput("info_equation"),
+       
+       h4("Correlation and p-value (including any added points)"),
+       verbatimTextOutput("info_coefs")
     )
   )
 )
