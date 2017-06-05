@@ -78,7 +78,7 @@ shinyServer(function(input, output) {
                 
                 cor_mtcars <- format(round(cor(mtcarswpt$hp, mtcarswpt$mpg),2), nsmall = 2)
                 pval <- paste0(format(anova(model1)$`Pr(>F)`[[1]]*100, digits = 3), "%")
-                paste0("Cor(HP, MPG) = ", cor_mtcars, "\nP-Value of MPG = ", pval)
+                paste0("Cor(HP,MPG) = ", cor_mtcars, "\nP-Value of MPG = ", pval)
         })
         
         output$info_equation <- renderText({

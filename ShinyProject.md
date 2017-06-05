@@ -1,54 +1,77 @@
-Presentation on a Shiny App: Adding Observations to a Model
+<style>
+.small-code pre code {
+  font-size: 1em;
+}
+</style>
+
+Adding Observations to a Model: A Shiny App
 ========================================================
 author: Paul Clark
 date: 2017-06-04
 autosize: true
+css: ie11fix.css
+  
+See the app at <https://clarpaul.shinyapps.io/add_point/>  
 
-See the app at: <<https://clarpaul.shinyapps.io/add_point/>>  
-See the code at: <<https://github.com/clarpaul/DevDataProducts_Project>>
+For app and presentation code, see <https://github.com/clarpaul/DevDataProducts_Project/>  
+See the *Add_Points* subdirectory for Shiny code
 
-
-What the app does: show the effect of adding points to a regression model
+The app aspires to be a learning tool for exploring aspects of linear regression
 ========================================================
+*Primary Goals*
+- Understand how adding differently positioned data increases/decreases p-values
+- See what different regression statistics 'look like'
+  * correlation coefficients
+  * p-values
+- See how differently positioned points impact the regression
+  * impact on the best-fit line
+  * distinguish between high and low leverage points
+- Have fun!
 
-- Displays a 2-D scatterplot with initial regression line
-- Adds observations to the plot at clicked points
-- Shows the coordinates of the most recently added points
-- With addition of each new observation, displays and updates...
-  * the regression line for the scatter plot
-  * the equation for the regression line
-  * the correlation coefficient and p-value
-- Also provides...
-  * a button to start over
-  * a check-box to show or hide the original trend line
 
-Code for initial regression plot
+Operation of the app
 ========================================================
+  
+1. The app displays a 2D scatterplot and regression line
+2. The user adds observations in <span style='color:red;'>red </span> by clicking plot locations
+3. With each added observation, the app updates and displays...
+   * the observation's coordinates
+   * the regression line for the scatterplot
+   * the equation for the line
+   * the correlation coef and p-value of the slope/regression
+4. Input widgets include...
+   * check-box to show or hide the original trend line
+   * button to clear added points and start over
+
+
+Regression plot before adding data
+========================================================
+class: small-code
+  
 
 ```r
-plot(mtcars$mpg, mtcars$hp, main =
-        "Horsepower vs. Miles-per-gallon", 
-        xlab = "MPG", ylab = "HP", 
-        bty = "n", pch = 16,
-        xlim = c(10, 35), ylim = c(50, 350))
-mtext("From R `mtcars` dataset")
-model1 <- lm(hp ~ mpg, data = mtcars)
-abline(model1, col = "red", lwd = 2)
+plot(mtcars$mpg, mtcars$hp, 
+ main = paste0("Horsepower",
+ " vs. Miles-per-gallon"), 
+ xlab = "MPG", ylab = "HP", 
+ bty = "n", pch = 16,
+ xlim = c(10, 35), 
+ ylim = c(50, 350))
+mtext("R `mtcars` dataset")
+model1 <- lm(hp ~ mpg,
+ data = mtcars)
+abline(model1, col = "red",
+ lwd = 2)
 ```
+***
+<img src="ShinyProject-figure/initialplot_revealed-1.png" title="plot of chunk initialplot_revealed" alt="plot of chunk initialplot_revealed" style="display: block; margin: auto;" />
 
-  
-Initial regression plot
+
+
+Full view of application after adding data
 ========================================================
 
-![plot of chunk initialplot_revealed](ShinyProject-figure/initialplot_revealed-1.png)
-  
-See the source file to confirm that this plot is dynamically generated from code 
+<div align="center">
+<img src="ShinyProject-figure/Screenshot_of_Shiny_App.png" width=1200 height=600>
+</div>
 
-Regression plot after clicking three points
-========================================================
-
-![plot of chunk initialplot_after_points](ShinyProject-figure/initialplot_after_points-1.png)
-  
-  
-Thank you!  
-Page 5 of 5, counting the title slide as 1 :)
