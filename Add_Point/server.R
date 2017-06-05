@@ -1,10 +1,9 @@
 #
-# This is the server logic of a Shiny web application. You can run the 
-# application by clicking 'Run App' above.
+# Shiny Server for "Regression Model: Effect of Adding Observations"
 #
-# Find out more about building applications with Shiny here:
+# This is the user-interface definition of a Shiny web application that allows the
+# user to add observations to a regression plot and see changes in real-time
 # 
-#    http://shiny.rstudio.com/
 #
 
 library(shiny)
@@ -13,6 +12,9 @@ xy <- function(val) {
         if (val == 0) return("NULL")
         format(round(val,1), nsmall = 1)
 }
+
+originalData <- subset(mtcars, select = c(hp, mpg))
+originalModel <- lm(hp ~ mpg, data = originalData)
 
 shinyServer(function(input, output) {
         
@@ -48,7 +50,17 @@ shinyServer(function(input, output) {
                         }
                 }
                 replot()
+                if (input$showOriginal) {
+                        abline(originalModel, lwd = 1)
+                }
                 isolate(v$clearpoints <- FALSE)
+        })
+        
+        v <- reactiveValues(clearpoints = FALSE)
+        
+        observeEvent(input$button, {
+                initialize_data()
+                v$clearpoints <- TRUE
         })
         
         output$info_added_pt <- renderText({
@@ -78,13 +90,6 @@ shinyServer(function(input, output) {
                 MPG <- format(round(coef(model1)[[2]],2), nsmall = 2)
                 paste0("HP = ", intercept, " + ", MPG, " * ", "MPG")
         })
-        
-        
-        v <- reactiveValues(clearpoints = FALSE)
-        
-        observeEvent(input$button, {
-                initialize_data()
-                v$clearpoints <- TRUE
-        })
+
         
 })
