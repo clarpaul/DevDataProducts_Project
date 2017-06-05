@@ -5,7 +5,7 @@ date: 2017-06-04
 autosize: true
 
 
-What the app does: shows the effect of adding points to a regression model
+What the app does: show the effect of adding points to a regression model
 ========================================================
 
 - Displays a 2-D scatterplot with initial regression line
