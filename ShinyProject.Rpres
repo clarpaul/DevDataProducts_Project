@@ -13,8 +13,8 @@ css: ie11fix.css
   
 See the app at <https://clarpaul.shinyapps.io/add_point/>  
 
-For app and presentation code, see <https://github.com/clarpaul/DevDataProducts_Project/>  
-See the *Add_Points* subdirectory for Shiny code
+For code, see <https://github.com/clarpaul/DevDataProducts_Project/>  
+`Add_Points` contains the app
 
 The app aspires to be a learning tool for exploring aspects of linear regression
 ========================================================
@@ -79,7 +79,7 @@ abline(model1, col = "red",
 
 
 
-Full view of application after adding data
+Full view of application *after* adding data
 ========================================================
 
 <div align="center">
