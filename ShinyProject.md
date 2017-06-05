@@ -14,7 +14,7 @@ css: ie11fix.css
 See the app at <https://clarpaul.shinyapps.io/add_point/>  
 
 For code, see <https://github.com/clarpaul/DevDataProducts_Project/>  
-`Add_Points` contains the app
+Subdirectory `Add_Point` contains the app
 
 The app aspires to be a learning tool for exploring aspects of linear regression
 ========================================================
