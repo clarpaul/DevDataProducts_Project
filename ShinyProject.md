@@ -38,8 +38,10 @@ Initial regression plot
 ========================================================
 
 ![plot of chunk initialplot_revealed](ShinyProject-figure/initialplot_revealed-1.png)
+  
+See the source file to confirm that this plot is dynamically generated from code 
 
-Regression plot after adding points
+Regression plot after clicking points
 ========================================================
 
 ![plot of chunk initialplot_after_points](ShinyProject-figure/initialplot_after_points-1.png)

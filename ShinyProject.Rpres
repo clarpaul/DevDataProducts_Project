@@ -46,8 +46,10 @@ mtext("From R `mtcars` dataset")
 model1 <- lm(hp ~ mpg, data = mtcars)
 abline(model1, col = "red", lwd = 2)
 ```
+  
+See the source file to confirm that this plot is dynamically generated from code 
 
-Regression plot after adding points
+Regression plot after clicking points
 ========================================================
 
 ```{r initialplot_after_points, echo = FALSE}
