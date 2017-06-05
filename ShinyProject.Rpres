@@ -1,0 +1,50 @@
+Shiny App: Adding Observations to a Model
+========================================================
+author: Paul Clark
+date: 2017-06-04
+autosize: true
+<style>
+  .col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px;    /* firefox */
+  }
+</style>
+
+
+What the app does
+========================================================
+
+- Displays a 2-D scatterplot with regression line
+- Adds observations to the regression when the user clicks in the plotting area
+- Updates the regression line when the user adds observations
+- Provides a button to start over
+- Provides a check-box to show or hide the original trend line
+
+Code for initial regression plot
+========================================================
+```{r initialplot_hidden, eval = FALSE}
+plot(mtcars$mpg, mtcars$hp, main =
+        "Horsepower vs. Miles-per-gallon", 
+        xlab = "MPG", ylab = "HP", 
+        bty = "n", pch = 16,
+        xlim = c(10, 35), ylim = c(50, 350))
+mtext("From R `mtcars` dataset")
+model1 <<- lm(hp ~ mpg, data = mtcars)
+abline(model1, col = "red", lwd = 2)
+```
+
+  
+Initial regression plot
+========================================================
+
+```{r initialplot_revealed, echo = FALSE}
+plot(mtcars$mpg, mtcars$hp, main =
+        "Horsepower vs. Miles-per-gallon", 
+        xlab = "MPG", ylab = "HP", 
+        bty = "n", pch = 16,
+        xlim = c(10, 35), ylim = c(50, 350))
+mtext("From R `mtcars` dataset")
+model1 <<- lm(hp ~ mpg, data = mtcars)
+abline(model1, col = "red", lwd = 2)
+```

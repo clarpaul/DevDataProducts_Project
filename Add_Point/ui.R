@@ -2,7 +2,7 @@
 # Shiny UI for "Regression Model: Effect of Adding Observations"
 #
 # This is the user-interface definition of a Shiny web application that allows the
-# user to add observations to a regression plot and see changes in real-time
+# user to add observations to a regression model and see changes in real-time
 # 
 #
 
@@ -29,7 +29,7 @@ shinyUI(fluidPage(
        # PLOT
        plotOutput("plot1", click = "plot1_click"),
        
-       # SHOW ORIGINAL TREND LINE
+       # CHECKBOX: SHOW ORIGINAL TREND LINE
        span(
         checkboxInput("showOriginal", "Show Original Trend Line", value = TRUE),
         style = "color:blue"
