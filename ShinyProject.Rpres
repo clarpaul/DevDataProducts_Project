@@ -4,6 +4,8 @@ author: Paul Clark
 date: 2017-06-04
 autosize: true
 
+See the app at: <<https://clarpaul.shinyapps.io/add_point/>>
+
 
 What the app does: show the effect of adding points to a regression model
 ========================================================
