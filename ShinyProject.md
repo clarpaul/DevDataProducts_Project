@@ -16,7 +16,7 @@ See the app at <https://clarpaul.shinyapps.io/add_point/>
 For code, see <https://github.com/clarpaul/DevDataProducts_Project/>  
 Subdirectory `Add_Point` contains the app
 
-The app aspires to be a learning tool for exploring aspects of linear regression
+The app is a learning tool to explore aspects of linear regression
 ========================================================
 *Primary Goals*
 - Understand how adding differently positioned data increases/decreases p-values
