@@ -1,4 +1,4 @@
-Shiny App: Adding Observations to a Model
+Presentation on a Shiny App: Adding Observations to a Model
 ========================================================
 author: Paul Clark
 date: 2017-06-04
@@ -49,7 +49,7 @@ abline(model1, col = "red", lwd = 2)
   
 See the source file to confirm that this plot is dynamically generated from code 
 
-Regression plot after clicking points
+Regression plot after clicking three points
 ========================================================
 
 ```{r initialplot_after_points, echo = FALSE}
@@ -74,8 +74,5 @@ points(xs, ys, col = "red", pch = 16, cex = 2)
 ```
   
   
-Thank you!                                                           
-  
-  
-Page 5 of 5   
-(including title slide)
+Thank you!  
+Page 5 of 5, counting the title slide as 1 :)

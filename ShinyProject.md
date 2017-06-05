@@ -1,4 +1,4 @@
-Shiny App: Adding Observations to a Model
+Presentation on a Shiny App: Adding Observations to a Model
 ========================================================
 author: Paul Clark
 date: 2017-06-04
@@ -41,14 +41,11 @@ Initial regression plot
   
 See the source file to confirm that this plot is dynamically generated from code 
 
-Regression plot after clicking points
+Regression plot after clicking three points
 ========================================================
 
 ![plot of chunk initialplot_after_points](ShinyProject-figure/initialplot_after_points-1.png)
   
   
-Thank you!                                                           
-  
-  
-Page 5 of 5   
-(including title slide)
+Thank you!  
+Page 5 of 5, counting the title slide as 1 :)
