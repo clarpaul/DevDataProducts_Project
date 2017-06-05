@@ -3,23 +3,21 @@ Shiny App: Adding Observations to a Model
 author: Paul Clark
 date: 2017-06-04
 autosize: true
-<style>
-  .col2 {
-    columns: 2 200px;         /* number of columns and width in pixels*/
-    -webkit-columns: 2 200px; /* chrome, safari */
-    -moz-columns: 2 200px;    /* firefox */
-  }
-</style>
 
 
-What the app does
+What the app does: shows the effect of adding points to a regression model
 ========================================================
 
-- Displays a 2-D scatterplot with regression line
-- Adds observations to the regression when the user clicks in the plotting area
-- Updates the regression line when the user adds observations
-- Provides a button to start over
-- Provides a check-box to show or hide the original trend line
+- Displays a 2-D scatterplot with initial regression line
+- Adds observations to the plot at clicked points
+- Shows the coordinates of the most recently added points
+- With addition of each new observation, displays and updates...
+  * the regression line for the scatter plot
+  * the equation for the regression line
+  * the correlation coefficient and p-value
+- Also provides...
+  * a button to start over
+  * a check-box to show or hide the original trend line
 
 Code for initial regression plot
 ========================================================
@@ -30,7 +28,7 @@ plot(mtcars$mpg, mtcars$hp, main =
         bty = "n", pch = 16,
         xlim = c(10, 35), ylim = c(50, 350))
 mtext("From R `mtcars` dataset")
-model1 <<- lm(hp ~ mpg, data = mtcars)
+model1 <- lm(hp ~ mpg, data = mtcars)
 abline(model1, col = "red", lwd = 2)
 ```
 
@@ -45,6 +43,33 @@ plot(mtcars$mpg, mtcars$hp, main =
         bty = "n", pch = 16,
         xlim = c(10, 35), ylim = c(50, 350))
 mtext("From R `mtcars` dataset")
-model1 <<- lm(hp ~ mpg, data = mtcars)
+model1 <- lm(hp ~ mpg, data = mtcars)
 abline(model1, col = "red", lwd = 2)
 ```
+
+Regression plot after adding points
+========================================================
+
+```{r initialplot_after_points, echo = FALSE}
+mtcarswpt <- subset(mtcars, select = c(hp, mpg))
+mtcarswpt <- data.frame(rbind(mtcarswpt, 
+                c(32,150),
+                c(27,150),
+                c(12,150)
+             ))
+xs <- c(32,27,12)
+ys <- c(150,150,150)
+plot(mtcarswpt$mpg, mtcarswpt$hp, main = "Horsepower vs. Miles-per-gallon",
+     xlab = "MPG", ylab = "HP",
+     bty = "n", pch = 16,
+     xlim = c(10, 35), ylim = c(50, 350))
+mtext("From R `mtcars` dataset")
+model2 <- lm(hp ~ mpg, data = mtcarswpt)
+abline(model2, col = "red", lwd = 2)
+abline(model1, lwd = 1)
+points(xs, ys, col = "red", pch = 16, cex = 2)
+
+```
+  
+  
+Thank you!
