@@ -47,4 +47,8 @@ Regression plot after clicking points
 ![plot of chunk initialplot_after_points](ShinyProject-figure/initialplot_after_points-1.png)
   
   
-Thank you!
+Thank you!                                                           
+  
+  
+Page 5 of 5   
+(including title slide)
