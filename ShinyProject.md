@@ -4,28 +4,28 @@
 }
 </style>
 
-Adding Observations to a Model: A Shiny App
+Adding Data to a Model: A Shiny App
 ========================================================
 author: Paul Clark
-date: 2017-06-04
+date: 06-04-2017
 autosize: true
 css: ie11fix.css
   
-See the app at <https://clarpaul.shinyapps.io/add_point/>  
+See app at <https://clarpaul.shinyapps.io/add_point/>  
 
-For code, see <https://github.com/clarpaul/DevDataProducts_Project/>  
-Subdirectory `Add_Point` contains the app
+For all code, see repo <https://github.com/clarpaul/DevDataProducts_Project/>  
+App code in subfolder "`Add_Point`"
 
-The app is a learning tool to explore aspects of linear regression
+The app is a learning tool for linear regression
 ========================================================
 *Primary Goals*
-- Understand how adding differently positioned data increases/decreases p-values
-- See what different regression statistics 'look like'
-  * correlation coefficients
-  * p-values
+- Understand how adding more data increases/decreases p-values
+- Visualize scatterplots for different regression statistics
+  * Correlation coefficients
+  * P-values
 - See how differently positioned points impact the regression
-  * impact on the best-fit line
-  * distinguish between high and low leverage points
+  * Which points most affect the best-fit line
+  * I.e., which points are high vs. low leverage/influence
 - Have fun!
 
 
@@ -33,7 +33,7 @@ Operation of the app
 ========================================================
   
 1. The app displays a 2D scatterplot and regression line
-2. The user adds observations in <span style='color:red;'>red </span> by clicking plot locations
+2. The user clicks plot locations to add observations in <span style='color:red;'>red </span>
 3. With each added observation, the app updates and displays...
    * the observation's coordinates
    * the regression line for the scatterplot
@@ -51,24 +51,22 @@ class: small-code
 
 ```r
 plot(mtcars$mpg, mtcars$hp, 
- main = paste0("Horsepower",
- " vs. Miles-per-gallon"), 
- xlab = "MPG", ylab = "HP", 
- bty = "n", pch = 16,
- xlim = c(10, 35), 
- ylim = c(50, 350))
+   main = paste0("Horsepower",
+     " vs. Miles-per-gallon"), 
+   xlab = "MPG", ylab = "HP", 
+   bty = "n", pch = 16,
+   xlim = c(10, 35), 
+   ylim = c(50, 350))
 mtext("R `mtcars` dataset")
 model1 <- lm(hp ~ mpg,
- data = mtcars)
+   data = mtcars)
 abline(model1, col = "red",
- lwd = 2)
+   lwd = 2)
 ```
 ***
 <img src="ShinyProject-figure/initialplot_revealed-1.png" title="plot of chunk initialplot_revealed" alt="plot of chunk initialplot_revealed" style="display: block; margin: auto;" />
 
-
-
-Full view of application *after* adding data
+Application *after* adding data
 ========================================================
 
 <div align="center">
