@@ -16,13 +16,13 @@ See app at <https://clarpaul.shinyapps.io/add_point/>
 For all code, see repo <https://github.com/clarpaul/DevDataProducts_Project/>  
 App code in subfolder "`Add_Point`"
 
-The app is a learning tool for linear regression
+The app is to learn about linear regression
 ========================================================
 *Primary Goals*
-- Understand how adding more data increases/decreases p-values
-- Visualize scatterplots for different regression statistics
+- Visualize regression statistics
   * Correlation coefficients
   * P-values
+- Understand how adding data affects p-values
 - See how differently positioned points impact the regression
   * Which points most affect the best-fit line
   * I.e., which points are high vs. low leverage/influence
@@ -44,7 +44,7 @@ Operation of the app
    * button to clear added points and start over
 
 
-Regression plot before adding data
+View 1: Regression plot *before* adding data
 ========================================================
 class: small-code
   
@@ -66,7 +66,7 @@ abline(model1, col = "red",
 ***
 <img src="ShinyProject-figure/initialplot_revealed-1.png" title="plot of chunk initialplot_revealed" alt="plot of chunk initialplot_revealed" style="display: block; margin: auto;" />
 
-Application *after* adding data
+View 2: Full application *after* adding data
 ========================================================
 
 <div align="center">

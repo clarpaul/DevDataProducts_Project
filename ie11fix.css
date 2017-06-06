@@ -1,3 +1,16 @@
+/*
+* ============= Explanation for this file ===================
+*   This file addresses an issue with ie11 in R presentation two-column mode.
+*   Chrome (and, reportedly, Firefox) works fine, but ie11 looks really
+*   weird: if there are code blocks or plots in two-column mode, 
+*   they float on top of the slide title, occluding it (Paul Clark experienced
+*   this first hand).
+*
+*   According to the author, the code below is from the "default css." 
+*   Reportedly, the only change from the default was that
+*   'position' was changed from 'fixed' to 'absolute'.  
+*/
+
 .reveal .slides section .column { 
   position: absolute; 
   width: 48%; 
